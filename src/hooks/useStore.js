@@ -4,12 +4,20 @@ import { nanoid } from 'nanoid';
 // build a hook that manages state. This will allow you to create cubes etc...
 export const useStore = create((set) => ({
     texture: 'dirt',
-    cubes: [{
+    cubes: [
+        {
         // intial cube
         key: nanoid(),
-        pos: [10, 0.5, 10],
+        pos: [2, 0.5, 0],
         texture: 'dirt',
-    }],
+        },
+        {
+        // intial cube
+        key: nanoid(),
+        pos: [1, 0.5, 0],
+        texture: 'wood',
+    }
+    ],
     addCube: (x, y, z) => {
         set((prev) => ({
             cubes: [
@@ -23,7 +31,11 @@ export const useStore = create((set) => ({
         }))
     },
     removeCube: () => {},
-    setTexture: () => {},
+    setTexture: (texture) => {
+        set(() => ({
+            texture
+        }))
+    },
     saveWorld: () => {},
     resetWorld: () => {},
 }))
