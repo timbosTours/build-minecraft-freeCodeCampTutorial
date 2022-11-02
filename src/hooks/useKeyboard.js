@@ -25,10 +25,11 @@ export const useKeyboard = () => {
         moveleft: false,
         moveright: false,
         jump: false,
-        texture1: false,
-        texture2: false,
-        texture3: false,
-        texture4: false,
+        dirt: false,
+        grass: false,
+        glass: false,
+        wood: false,
+        log: false,
     })
 
     const handleKeyDown = useCallback((e) => {
