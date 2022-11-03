@@ -1,10 +1,13 @@
 import create from 'zustand';
 import { nanoid } from 'nanoid';
 
+const getLocalStorage = (key) => JSON.parse(window.localStorage.getItem(key))
+const setLocalStorage = (key, value) => JSON.stringify(window.localStorage.setItem(key, JSON.stringify(value)))
+
 // build a hook that manages state. This will allow you to create cubes etc...
 export const useStore = create((set) => ({
     texture: 'dirt',
-    cubes: [ ],
+    cubes: getLocalStorage('cubes') || [ ],
         // default cubes for debugging/creating
     //     {
     //     // intial cube
@@ -44,6 +47,14 @@ export const useStore = create((set) => ({
             texture
         }))
     },
-    saveWorld: () => {},
-    resetWorld: () => {},
+    saveWorld: () => {
+        set((prev) => {
+            setLocalStorage('cubes', prev.cubes)
+        })
+    },
+    resetWorld: () => {
+        set(() => ({
+            cubes: []
+        }))
+    },
 }))
